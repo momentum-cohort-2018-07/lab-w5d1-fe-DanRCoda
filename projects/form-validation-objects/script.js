@@ -31,7 +31,9 @@ function errorMessage (element) {
   errorDiv.classList.add('error-msg')
   element.appendChild(errorDiv)
 
-  errorDiv.innerText = 'field is required'
+  let label = document.querySelector('label')
+  let requiredField = label.getAttribute('for')
+  errorDiv.innerText = requiredField + ' is required'
 }
 
 function carValid (element) {
@@ -40,7 +42,7 @@ function carValid (element) {
   errorDiv.classList.add('error-msg')
   carDiv.appendChild(errorDiv)
 
-  errorDiv.innerText = 'field is required'
+  errorDiv.innerHTML = 'field is required'
 }
 
 function clearError () {
