@@ -18,7 +18,7 @@ document.getElementById('parking-form').addEventListener('submit', function (e) 
     } else if (element.value.trim() === '') {
       element.parentElement.classList.add('input-invalid')
       element.parentElement.classList.remove('input-valid')
-      errorMessage(element.parentElement)
+      errorMessage(element)
     } else {
       element.parentElement.classList.add('input-valid')
       element.parentElement.classList.remove('input-invalid')
@@ -29,20 +29,20 @@ document.getElementById('parking-form').addEventListener('submit', function (e) 
 function errorMessage (element) {
   let errorDiv = document.createElement('div')
   errorDiv.classList.add('error-msg')
-  element.appendChild(errorDiv)
 
-  let label = document.querySelector('label')
-  let requiredField = label.getAttribute('for')
-  errorDiv.innerText = requiredField + ' is required'
+  let requiredField = element.getAttribute('id')
+  errorDiv.innerText = capitalize(requiredField) + ' is required'
+  element.parentElement.appendChild(errorDiv)
 }
 
 function carValid (element) {
   let carDiv = document.getElementById('car-field')
   let errorDiv = document.createElement('div')
   errorDiv.classList.add('error-msg')
+  
+  let requiredField = element.getAttribute('id')
+  errorDiv.innerHTML = capitalize(requiredField) + ' is required'
   carDiv.appendChild(errorDiv)
-
-  errorDiv.innerHTML = 'field is required'
 }
 
 function clearError () {
@@ -51,3 +51,8 @@ function clearError () {
     errorMsg.remove()
   }
 }
+
+function capitalize (requiredField) {
+  return requiredField[0].toUpperCase() + requiredField.slice(1)
+}
+
